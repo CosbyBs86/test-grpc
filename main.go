@@ -4,7 +4,7 @@ import (
 	"google.golang.org/grpc"
 	"log"
 	"net"
-	"test/test-grpc/server/grpcimplementation"
+	"test/test-grpc/grpcimplementation"
 )
 
 var GRPCInstance grpcimplementation.GrpcServiceServer

@@ -1,4 +1,4 @@
-module test/test-grpc/server
+module test/test-grpc
 
 go 1.17
 
