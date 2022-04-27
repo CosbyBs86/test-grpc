@@ -1,0 +1,59 @@
+syntax = "proto3";
+option go_package = "./grpcimplementation";
+
+package NodeGrpc;
+
+/*
+Payload request for append items command
+*/
+message AppendItemsRequest {
+  NodeBaseRequest BaseRequest = 1;
+  GrpcItem Item = 2;
+}
+
+/*
+Payload request for append items command
+*/
+message AppendItemsRequestUnary {
+  NodeBaseRequest BaseRequest = 1;
+  repeated GrpcItem Item = 2;
+}
+
+message BaseResponse{
+  string Sender = 1;
+  bool Success = 2;
+  string Message = 3;
+  repeated string Parameters = 4;
+}
+
+message NodeBaseRequest{
+  uint64 TransactionId = 1;
+}
+
+message GrpcItem {
+  int32 NtinId = 1;
+  string Serial = 2;
+  int32 PNtinId = 3;
+  string PSerial = 4;
+  int32 Type = 5;
+  int32 Sequence = 6;
+  int32 Status = 7;
+  string QAStatus = 8;
+  string HelperCode = 9;
+  string WorkOrderId = 10;
+  string Flags = 11;
+  int32 Notification = 12;
+  string Zone = 13;
+  map<string, string> VariableData = 14;
+}
+
+message EtsBaseResponse {
+  BaseResponse BaseResponse = 1;
+  uint32 ErrorCode = 2;
+}
+
+
+service GrpcService{
+  //Append items command
+  rpc AppendItems(stream AppendItemsRequest) returns (EtsBaseResponse){};
+}
